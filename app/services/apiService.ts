@@ -32,13 +32,21 @@ const apiService = {
 
         const token = await getAccessToken();
 
+        const headers: HeadersInit = {};
+
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        if (!(data instanceof FormData)) {
+            headers['Content-Type'] = 'application/json';
+        }
+
         return new Promise((resolve, reject) => {
             fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
                 method: 'POST',
                 body: data,
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: headers
             })
                 .then(response => response.json())
                 .then((json) => {
@@ -61,6 +69,7 @@ const apiService = {
                 body: data,
                 headers: {
                     'Accept': 'application/json',
+                    'Content-Type': 'application/json' // Added Content-Type header
                 }
             })
                 .then(response => response.json())

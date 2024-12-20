@@ -6,6 +6,7 @@ import { ChangeEvent, useState } from 'react';
 import Modal from './Modal';
 import CustomButton from '../forms/CustomButton';
 import Categories from '../addproperty/Categories';
+
 import useAddPropertyModal from '@/app/hooks/useAddPropertyModal';
 import SelectCountry, {SelectCountryValue} from '../forms/SelectCountry';
 
@@ -39,7 +40,6 @@ const AddPropertyModal = () => {
 
     const setCategory = (category: string) => {
         setDataCategory(category)
-        console.log(category)
     }
 
     const setImage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -54,6 +54,7 @@ const AddPropertyModal = () => {
     // SUbmit
 
     const submitForm = async () => {
+        console.log('submitForm');
 
         if (
             dataCategory &&
@@ -75,18 +76,20 @@ const AddPropertyModal = () => {
             formData.append('country_code', dataCountry.value);
             formData.append('image', dataImage);
 
-            const response = await apiService.postWithoutToken('/api/properties/create/', formData);
+            const response = await apiService.post('/api/properties/create/', formData);
 
             if (response.success) {
                 console.log('SUCCESS :-D');
 
-                router.push('/?added=true');
+                router.push('/');
 
                 addPropertyModal.close();
             } else {
                 console.log('Error');
 
-                const tmpErrors: string[] = Object.values(response).map((error: any) => error.message || 'Unknown error');
+                const tmpErrors: string[] = Object.values(response).map((error: any) => {
+                    return error;
+                })
 
                 setErrors(tmpErrors)
             }
