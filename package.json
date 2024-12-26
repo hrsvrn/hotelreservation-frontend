@@ -15,6 +15,9 @@
     "react-date-range": "^2.0.1",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "react-select": "^5.9.0",
+    "react-use-websocket": "^4.11.1",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "world-countries": "^5.0.0",
     "zustand": "^5.0.1"
   },

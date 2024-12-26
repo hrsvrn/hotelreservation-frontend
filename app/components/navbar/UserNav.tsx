@@ -8,6 +8,7 @@ import LogoutButton from "../LogoutButton";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignupModal from "@/app/hooks/useSignupModal";
+import { set } from "date-fns";
 
 interface UserNavProps {
     userId?: string | null;
@@ -49,6 +50,13 @@ const UserNav: React.FC<UserNavProps> = ({
                                     router.push('/myproperties');
                                 }}
                             />
+                            <MenuLink
+                                label="Inbox"
+                                onClick={()=>{
+                                    setIsOpen(false);
+                                    router.push('/inbox')
+                                }}
+                            />
 
                             <MenuLink
                                 label='My reservations'
@@ -57,7 +65,13 @@ const UserNav: React.FC<UserNavProps> = ({
                                     router.push('/myreservations');
                                 }}
                             />
-
+                            <MenuLink
+                                label="My Favourites"
+                                onClick={()=>{
+                                    setIsOpen(false);
+                                    router.push('/myfavourites')
+                                }}
+                            />
                             <LogoutButton />
                         </>
                     ) : (
