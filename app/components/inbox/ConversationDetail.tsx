@@ -1,12 +1,6 @@
 'use client'
 import CustomButton from "../forms/CustomButton";
-import { ConversationType } from "@/app/inbox/page";
-interface ConversationDetailProps{
-    conversation:ConversationType;
-}
-const ConversationDetail: React.FC<ConversationDetailProps>=({
-    conversation
-})=>{
+const ConversationDetail=()=>{
     return(
         <>
         <div className="max-h-[400px] overflow-auto flex flex-col space-y-4">
